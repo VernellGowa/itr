@@ -1,0 +1,2 @@
+set(itr_MESSAGE_FILES "msg/GoToLocationAction.msg;msg/GoToLocationActionGoal.msg;msg/GoToLocationActionResult.msg;msg/GoToLocationActionFeedback.msg;msg/GoToLocationGoal.msg;msg/GoToLocationResult.msg;msg/GoToLocationFeedback.msg;msg/LookAtAction.msg;msg/LookAtActionGoal.msg;msg/LookAtActionResult.msg;msg/LookAtActionFeedback.msg;msg/LookAtGoal.msg;msg/LookAtResult.msg;msg/LookAtFeedback.msg")
+set(itr_SERVICE_FILES "srv/getCoordinates.srv")

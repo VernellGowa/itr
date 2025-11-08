@@ -1,0 +1,2 @@
+itr
+-DCATKIN_DEVEL_PREFIX=/home/k24052303/ros_ws/devel -DCMAKE_INSTALL_PREFIX=/home/k24052303/ros_ws/install -G Unix Makefiles
