@@ -11,7 +11,7 @@ START = (2, 2)
 LENGTH = 10
 rospy.init_node('goto_node')
 vel = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=5000)
-command = Twist()
+# command = Twist()
 
 def closed(current: Pose, x, y):
     arrived = False

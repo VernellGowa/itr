@@ -1,9 +1,10 @@
 # Request
-geometry_msgs/Point
+geometry_msgs/Point destination
 
 ---
 # Result
-geometry_msgs/Point
+geometry_msgs/Point location
+
 ---
 # Feedback
 float64 distance
