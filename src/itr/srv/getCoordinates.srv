@@ -1,0 +1,6 @@
+# Request
+string name
+
+---
+# Result
+geometry_msgs/Point coords

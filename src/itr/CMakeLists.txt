@@ -13,6 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
   actionlib_msgs
   message_generation
   geometry_msgs
+  move_base_msgs
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -58,7 +60,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
-  getCoordinates.srv
+  GetCoordinates.srv
 )
 
 # Generate actions in the 'action' folder
@@ -73,6 +75,7 @@ generate_messages(
   DEPENDENCIES
   geometry_msgs
   actionlib_msgs
+  move_base_msgs
 )
 
 ################################################
@@ -107,7 +110,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES itr
-  CATKIN_DEPENDS actionlib_msgs std_msgs message_runtime geometry_msgs
+  CATKIN_DEPENDS actionlib_msgs std_msgs message_runtime geometry_msgs move_base_msgs
 #  DEPENDS system_lib
 )
 
