@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rospy
 import math
 import angles
@@ -31,10 +33,10 @@ def delivery():
     # GO TO LOCATION ACTION
 
     go_to_client.send_goal(go_to_goal)
-    no_timeout = go_to_client.wait_for_result(rospy.Duration(30.0))
+    no_timeout = go_to_client.wait_for_result(rospy.Duration(50.0))
 
     if not no_timeout:
-        rospy.loginfo("Action did not finish before the timeout.")
+        rospy.loginfo("Go to clinet Action did not finish before the timeout.")
         go_to_client.cancel_goal()
         return
 

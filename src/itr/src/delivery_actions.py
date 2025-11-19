@@ -19,7 +19,7 @@ from itr.msg import GoToLocationGoal
 from itr.msg import GoToLocationResult
 from itr.msg import GoToLocationFeedback
 
-from itr.msg import GetCoordinates
+from itr.srv import GetCoordinates
 
 class DeliveryActionServer():
 
@@ -28,13 +28,16 @@ class DeliveryActionServer():
         self.tf_listener = tf.TransformListener()
 
         self.look_at_serv = actionlib.SimpleActionServer('look_at', LookAtAction,
-         execute_cb=self.look_at_execute_cb, auto_start=True)
+         execute_cb=self.look_at_execute_cb, auto_start=False)
 
         self.go_to_location_serv = actionlib.SimpleActionServer('go_to', GoToLocationAction,
-         execute_cb=self.go_to_location_execute_cb, auto_start=True)
+         execute_cb=self.go_to_location_execute_cb, auto_start=False)
         
         self.mb_client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
         self.mb_client.wait_for_server()
+
+        self.look_at_serv.start()
+        self.go_to_location_serv.start()
 
     def get_robot_pose(self):
         # try:

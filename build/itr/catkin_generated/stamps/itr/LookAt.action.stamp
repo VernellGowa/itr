@@ -1,9 +1,9 @@
 # Request
-geometry_msgs/Quaternion destination
+geometry_msgs/Point location
 
 ---
 # Result
-geometry_msgs/Quaternion orientation
+bool result
 ---
 # Feedback
 float64 offset

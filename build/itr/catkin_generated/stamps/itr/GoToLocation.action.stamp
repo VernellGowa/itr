@@ -1,9 +1,9 @@
 # Request
-geometry_msgs/Point destination
+string name
 
 ---
 # Result
-geometry_msgs/Point location
+bool result
 
 ---
 # Feedback
