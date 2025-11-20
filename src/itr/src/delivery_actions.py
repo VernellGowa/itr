@@ -48,6 +48,7 @@ class DeliveryActionServer():
     def look_at_execute_cb(self, goal):
         look_at_result = LookAtResult()
         self.person_location = goal.location
+        print("about to start", goal.location)
         try:
             pos, qt = self.get_robot_pose()
 
@@ -149,6 +150,9 @@ if __name__ == '__main__':
     server = DeliveryActionServer()
     rospy.spin()
 
+# source devel/setup.bash
+# roslaunch itr delivery.launch
+# rosrun itr delivery.py
 # roslaunch rosplan_stage_demo empty_stage_single_robot.launch
 # rosrun rviz rviz rospack -d `rospack find rosplan_stage_demo`/config/rosplan_stage_demo.rviz
 

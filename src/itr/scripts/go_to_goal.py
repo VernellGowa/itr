@@ -24,12 +24,14 @@ goal.target_pose.pose.orientation.y = 0
 goal.target_pose.pose.orientation.z = math.sin(-math.pi/4)
 goal.target_pose.pose.orientation.w = math.cos(-math.pi/4)
 
+print("about to start")
+
 move_base_client.send_goal(goal)
 move_base_client.wait_for_result()
 
 status = move_base_client.get_state()
 
-if status == GoalStatus.SUCCEDED:
+if status == GoalStatus.SUCCEEDED:
     print("yay")
 else:
     print("noo")
