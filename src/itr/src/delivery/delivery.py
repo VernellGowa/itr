@@ -24,7 +24,7 @@ def delivery():
     go_to_client.wait_for_server()
     look_at_client.wait_for_server()
 
-    go_to_goal = GoToLocationGoal("kitchen")
+    go_to_goal = GoToLocationGoal("living_room")
     look_at_goal = LookAtGoal()
     look_at_goal.location.x = 1
     look_at_goal.location.y = 1

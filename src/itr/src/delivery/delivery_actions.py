@@ -48,6 +48,7 @@ class DeliveryActionServer():
     def look_at_execute_cb(self, goal):
         look_at_result = LookAtResult()
         self.person_location = goal.location
+        print("about to start", goal.location)
         try:
             pos, qt = self.get_robot_pose()
 
