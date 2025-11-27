@@ -1,0 +1,7 @@
+
+
+xhost +local:root 
+
+roslaunch rosplan_stage_demo empty_stage_single_robot.launch
+rosrun rviz rviz -d `rospack find rosplan_stage_demo`/config/rosplan_stage_demo.rviz
+source devel/setup.bash

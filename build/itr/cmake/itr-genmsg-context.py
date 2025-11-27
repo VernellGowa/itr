@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
 messages_str = "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtAction.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg"
-services_str = "/home/k24052303/ros_ws/src/itr/srv/GetCoordinates.srv"
+services_str = "/home/k24052303/ros_ws/src/itr/srv/GetCoordinates.srv;/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv"
 pkg_name = "itr"
 dependencies_str = "geometry_msgs;actionlib_msgs;move_base_msgs"
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"

@@ -61,6 +61,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
   FILES
   GetCoordinates.srv
+  LowBattery.srv
 )
 
 # Generate actions in the 'action' folder

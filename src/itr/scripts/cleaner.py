@@ -12,16 +12,27 @@ from geometry_msgs.msg import Twist
 import actionlib
 from sensor_msgs.msg import LaserScan
 from std_msgs.msg import Bool
+from std_srvs.srv import Empty, EmptyResponse
+
 
 battery = 100
 vel = None
+
+
+def low_battery(req):
+    global battery
+    battery = 10
+    return EmptyResponse()
+
+def low_battery_server():
+    s = rospy.Service('low_battery', Empty, low_battery)
 
 def charger_goal_cb(userdata, goal):
     target = MoveBaseGoal()
     target.target_pose.header.frame_id = "map"
     target.target_pose.header.stamp = rospy.Time.now()
-    target.target_pose.pose.position.x = 2.0
-    target.target_pose.pose.position.y = 1.0
+    target.target_pose.pose.position.x = 11.0
+    target.target_pose.pose.position.y = 2.0
     target.target_pose.pose.orientation.w = 1.0
     return target
 
@@ -29,22 +40,24 @@ class CleanState(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['succeeded'], )
+        self.dirt_pub = rospy.Publisher('/dirt_detected', Bool, queue_size=10)
         
     def execute(self, userdata):
-        rate = rospy.Rate(10) 
+        rate = rospy.Rate(2) 
         command = Twist()
-        command.angular.z = 1
+        command.angular.z = 5
 
         for _ in range(20):
             vel.publish(command)
             rate.sleep()
+        self.dirt_pub.publish(False)
 
         return 'succeeded'
     
 class TurnState(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['clear', 'blocked'], )
+                             outcomes=['clear',], )
     #     self.trigger = False
         
     # def avoid_obstacles(self, data: LaserScan):
@@ -52,7 +65,7 @@ class TurnState(smach.State):
     #     self.trigger = closest_object < 0.5
 
     def execute(self, userdata):
-        # pub = rospy.Subscriber('/base_scan/pose', LaserScan, self.avoid_obstacles)
+        # sub = rospy.Subscriber('/base_scan/pose', LaserScan, self.avoid_obstacles)
         # while not rospy.is_shutdown():
         #     if self.preempt_requested():
         #         self.service_preempt()
@@ -65,7 +78,7 @@ class TurnState(smach.State):
 
         for _ in range(5):
             vel.publish(command)
-            rate.sleep()
+            rate.sleep()        
 
             # return 'blocked'
         return 'clear'
@@ -81,7 +94,7 @@ class MonitorObstaclesState(smach.State):
         self.trigger = closest_object < 0.5
 
     def execute(self, userdata):
-        pub = rospy.Subscriber('/base_scan/pose', LaserScan, self.avoid_obstacles)
+        sub = rospy.Subscriber('/base_scan', LaserScan, self.avoid_obstacles)
         while not rospy.is_shutdown():
             if self.preempt_requested():
                 self.service_preempt()
@@ -102,13 +115,14 @@ class DetectDirtState(smach.State):
         self.trigger = data.data     
         
     def execute(self, userdata):
-        pub = rospy.Subscriber('/dirt_detected', Bool, self.detect_dirt)
+        self.trigger = False
+        sub = rospy.Subscriber('/dirt_detected', Bool, self.detect_dirt)
         while not rospy.is_shutdown():
             if self.preempt_requested():
                 self.service_preempt()
                 return 'not_detected_dirt'
-
             if self.trigger:
+                
                 return 'detected_dirt'
             
         return 'not_detected_dirt'
@@ -132,19 +146,21 @@ class ChargeState(smach.State):
         
     def execute(self, userdata):
         global battery
+        print("CHARGINGGG")
         while battery < 100:
             battery += 1
-            rospy.sleep(0.5)
+            rospy.sleep(0.25)
 
         return 'high'
     
 class RandomMoveState(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
-                             outcomes=['preempted', 'aborted'],)
+                             outcomes=['preempted', 'low', 'aborted'],)
         
     def execute(self, userdata):
         rate = rospy.Rate(10) 
+        global battery
 
         while not rospy.is_shutdown():
             if self.preempt_requested():
@@ -155,6 +171,9 @@ class RandomMoveState(smach.State):
             command.linear.x = 0.5
             command.angular.z = random.uniform(-1, 1)
             vel.publish(command)
+
+            if battery < 20:
+                return 'low'
             
             rate.sleep()
         return 'aborted'
@@ -164,22 +183,30 @@ def child_term_cb(outcome_map):
         return True
     if outcome_map['MONITOR_OBSTACLES'] == 'blocked':
         return True
+    if outcome_map['RANDOM_MOVE'] == 'low':
+        return True
+
     return False
 
 def main():
     rospy.init_node('vacuum_behaviour')
+    low_battery_server()
+    mb_client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
+    mb_client.wait_for_server()
+
     global vel
     vel = rospy.Publisher('/cmd_vel', Twist, queue_size=10)
 
     sm = StateMachine(outcomes=['finished'])
 
     with sm:
-        cc = Concurrence(outcomes = ['preempted', 'obstructed', 'found_dirt'],
+        cc = Concurrence(outcomes = ['preempted', 'low', 'obstructed', 'found_dirt'],
                         default_outcome = 'preempted',
                         child_termination_cb=child_term_cb,
                         outcome_map={
                             'found_dirt': {'DETECT_DIRT': 'detected_dirt'},
-                            'obstructed': {'MONITOR_OBSTACLES': 'blocked'}
+                            'obstructed': {'MONITOR_OBSTACLES': 'blocked'},
+                            'low': {'RANDOM_MOVE': 'low'}
                         })
         
         with cc:
@@ -188,7 +215,7 @@ def main():
             Concurrence.add('MONITOR_OBSTACLES', MonitorObstaclesState())
 
         StateMachine.add('PARALLEL_MOVE', cc,
-            transitions={'preempted': 'MONITOR_CHARGING', 'found_dirt': 'CLEAN', 'obstructed': 'TURN'})
+            transitions={'preempted': 'MONITOR_CHARGING', 'found_dirt': 'CLEAN', 'obstructed': 'TURN', 'low': 'NAVIGATE_TO_CHARGER'})
         
         StateMachine.add('MONITOR_CHARGING', MonitorBatteryState(),
             transitions={'high': 'PARALLEL_MOVE', 'low': 'NAVIGATE_TO_CHARGER'})
@@ -205,3 +232,8 @@ def main():
 
         StateMachine.add('CLEAN', CleanState(),
             transitions={'succeeded': 'PARALLEL_MOVE'}) 
+   
+    outcome = sm.execute()
+
+if __name__ == '__main__':
+    main()
