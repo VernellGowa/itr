@@ -7,10 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/k24052303/ros_ws/devel:$CMAKE_PREFIX_PATH"
-export LD_LIBRARY_PATH="/home/k24052303/ros_ws/devel/lib:$LD_LIBRARY_PATH"
-export PKG_CONFIG_PATH="/home/k24052303/ros_ws/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
+export LD_LIBRARY_PATH='/opt/itr_ws/devel/lib:/opt/ros/noetic/lib:/opt/ros/noetic/lib/x86_64-linux-gnu:/.singularity.d/libs'
+export PKG_CONFIG_PATH='/opt/itr_ws/devel/lib/pkgconfig:/opt/ros/noetic/lib/pkgconfig:/opt/ros/noetic/lib/x86_64-linux-gnu/pkgconfig'
 export PWD='/home/k24052303/ros_ws/build'
-export PYTHONPATH="/home/k24052303/ros_ws/devel/lib/python3/dist-packages:$PYTHONPATH"
-export ROSLISP_PACKAGE_DIRECTORIES="/home/k24052303/ros_ws/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/k24052303/ros_ws/src:$ROS_PACKAGE_PATH"
+export PYTHONPATH='/opt/itr_ws/devel/lib/python3/dist-packages:/opt/ros/noetic/lib/python3/dist-packages'

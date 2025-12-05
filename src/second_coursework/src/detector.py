@@ -3,8 +3,6 @@
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
-from itr.srv import YOLOLastFrame, YOLOLastFrameResponse
-from itr.msg import YOLODetection
 import numpy as np
 from yolov4 import Detector
 import rospy
@@ -17,7 +15,7 @@ class DetectorSingleton:
             cls._instance.detector = Detector(gpu_id=0, config_path='/opt/darknet/cfg/yolov4.cfg',
                                  weights_path='/opt/darknet/yolov4.weights',
                                  lib_darknet_path='/opt/darknet/libdarknet.so',
-                                 meta_path='/ros_ws/src/itr/cfg/coco.data')
+                                 meta_path='/home/k24052303/ros_ws/src/cfg/coco.data')
             cls._instance.bridge = CvBridge()
             cls._instance.cv_image = None
             rospy.Subscriber("/usb_cam/image_raw", Image, cls._instance.img_callback) 

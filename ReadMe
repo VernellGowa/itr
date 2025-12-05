@@ -12,3 +12,9 @@ roslaunch video_stream_opencv camera.launch camera_name:=usb_cam loop_videofile:
 
 rosrun itr yolo_actions.py
 rosrun rqt_image_view rqt_image_view
+
+catkin_make -DRT_LIBRARY=~/my_system_libs/librt.so
+
+roslaunch second_coursework student_nodes.launch
+
+chmod +x *.py

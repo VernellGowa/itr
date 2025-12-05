@@ -8,13 +8,10 @@ from smach_ros import SimpleActionState
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from actionlib_msgs.msg import GoalStatus
 import actionlib
-from sensor_msgs.msg import LaserScan
-from std_msgs.msg import Int
-from std_srvs.srv import Empty, EmptyResponse
 from detector import DetectorSingleton
 
-from itr.srv import FindObject, FindObjectResponse, FindObjectRequest
-from itr.msg import FindObjectAction, FindObjectFeedback
+from second_coursework.srv import FindObject, FindObjectResponse, FindObjectRequest
+from second_coursework.msg import FindObjectAction, FindObjectFeedback
 
 ROOMS = {
     'A': (4,8),

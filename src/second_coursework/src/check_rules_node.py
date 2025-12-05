@@ -3,24 +3,10 @@
 import rospy
 import smach
 from smach import StateMachine, Concurrence
-import smach_ros
 from smach_ros import SimpleActionState
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
-from actionlib_msgs.msg import GoalStatus
 import actionlib
-from sensor_msgs.msg import LaserScan
-from std_msgs.msg import Int
-from std_srvs.srv import Empty, EmptyResponse
-
-from sensor_msgs.msg import Image
-from cv_bridge import CvBridge
-import cv2
-from itr.srv import YOLOLastFrame, YOLOLastFrameResponse
-from itr.msg import YOLODetection
-import numpy as np
-from yolov4 import Detector
-
-from itr.msg import CheckRulesAction, CheckRulesFeedback
+from second_coursework.msg import CheckRulesAction, CheckRulesFeedback
 from detector import DetectorSingleton
 
 ROOMS = {

@@ -3,29 +3,12 @@
 import rospy
 import smach
 from smach import StateMachine, Concurrence
-import smach_ros
 from smach_ros import SimpleActionState
-import random
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
-from actionlib_msgs.msg import GoalStatus
-from geometry_msgs.msg import Twist
 import actionlib
-from sensor_msgs.msg import LaserScan
-from std_msgs.msg import Bool
-from std_srvs.srv import Empty, EmptyResponse
-
-from sensor_msgs.msg import Image
-from cv_bridge import CvBridge
-import cv2
-from itr.srv import YOLOLastFrame, YOLOLastFrameResponse
-from itr.msg import YOLODetection
-import numpy as np
-from yolov4 import Detector
-from check_rules import CheckRulesActionServer
-from find_object import FindObjectActionServer
-from itr.srv import FindObject, FindObjectResponse
-from itr.msg import FindObjectAction, FindObjectGoal
-from itr.msg import CheckRulesAction, CheckRulesGoal
+from second_coursework.srv import FindObject, FindObjectResponse
+from second_coursework.msg import FindObjectAction, FindObjectGoal
+from second_coursework.msg import CheckRulesAction, CheckRulesGoal
 
 class WaitState(smach.State):
     def __init__(self):
@@ -38,7 +21,7 @@ class WaitState(smach.State):
             rospy.sleep(0.1)
         return 'finished'
     
-class WorkState(smach.State):
+class WorkerState(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
                              outcomes=['preempted', ],)
@@ -50,7 +33,7 @@ class WorkState(smach.State):
 
         self.is_searching_for_object = False 
         self.trigger_find_object = False
-        self.requested_object_name = ""
+        self.object_name = ""
 
         self.service = rospy.Service('/find_object', FindObject, self.handle_find_object_request)
 
@@ -63,7 +46,7 @@ class WorkState(smach.State):
                 self.check_rules_client.cancel_all_goals()
 
                 goal = FindObjectGoal()
-                goal.name = self.name 
+                goal.name = self.object_name 
                 self.find_object_client.send_goal(goal)
                 self.find_object_client.wait_for_result()
                 
@@ -82,7 +65,7 @@ class WorkState(smach.State):
             rospy.logwarn("Already searching for an object.")
             return False 
         
-        self.requested_object_name = req.name
+        self.object_name = req.object_name
         self.trigger_find_object = True
 
         return True 
@@ -92,12 +75,12 @@ def main():
     mb_client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
     mb_client.wait_for_server()
 
-    sm = StateMachine(outcomes=['finished'])
+    sm = StateMachine(outcomes=['finished', 'failed'])
     with sm:
     
         StateMachine.add('WAIT', WaitState(),
-            transitions={'finished': 'WORK', 'preempted': 'failed'},) 
-        StateMachine.add('WORK', WorkState(),
+            transitions={'finished': 'WORKER', 'preempted': 'failed'},) 
+        StateMachine.add('WORKER', WorkerState(),
             transitions={'preempted': 'failed'},) 
     outcome = sm.execute()
 

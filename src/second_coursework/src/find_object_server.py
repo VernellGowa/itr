@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import rospy
-from itr.srv import FindObject, FindObjectResponse, FindObjectRequest
+from second_coursework.srv import FindObject, FindObjectResponse, FindObjectRequest
 from std_msgs.msg import Bool
 
 location_map = { "kitchen": [10, 8.0, 0.0], "living_room": [2.0, 3.0, 0] }

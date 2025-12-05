@@ -135,12 +135,7 @@ def main():
                             remapping={'goal_coords_out': 'goal_coords_out', 'object_detected_out': 'object_detected_out',
                              'object_detected_in': 'object_detected_in'})
             Concurrence.add('NAVIGATE_TO_ROOM', 
-<<<<<<< HEAD
-                SimpleActionState('move_base', MoveBaseAction, goal_cb=nav_to_room_vb, input_keys=['goal_coords_in']),
-=======
                 SimpleActionState('move_base', MoveBaseAction, goal_cb=nav_to_room_cb, input_keys=['goal_coords_in']),
-                    transitions={'succeeded': 'completed', 'aborted':'failed', 'preempted':'failed'},
->>>>>>> 0afbdad8dfbb3c898ca688bd6fa57932dd5291ca
                     remapping={'goal_coords_in': 'goal_coords_in'})
 
         StateMachine.add('DETECT_OBJECTS', YOLODetectionState(),
