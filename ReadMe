@@ -5,3 +5,10 @@ xhost +local:root
 roslaunch rosplan_stage_demo empty_stage_single_robot.launch
 rosrun rviz rviz -d `rospack find rosplan_stage_demo`/config/rosplan_stage_demo.rviz
 source devel/setup.bash
+
+roslaunch usb_cam usb_cam-test.launch
+
+roslaunch video_stream_opencv camera.launch camera_name:=usb_cam loop_videofile:=true video_stream_provider:=/home/k24052303/ros_ws/objects2.mov
+
+rosrun itr yolo_actions.py
+rosrun rqt_image_view rqt_image_view

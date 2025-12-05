@@ -33,9 +33,9 @@ def nav_to_room_vb(userdata, goal):
 
 class YOLODetectionState(smach.State):
     target_objects = {
-        "book": (2,8),
-        "phone": (8,8),
-        "bottle": (4,2),
+        "book": (2,3),
+        "phone": (10,9),
+        "bottle": (1,9),
         "apple": None
     }
 
@@ -47,12 +47,13 @@ class YOLODetectionState(smach.State):
     def __init__(self):
         smach.State.__init__(self, 
                             outcomes=['succeeded', 'aborted'],
-                            output_keys=['goal_coords_out'] )
+                            input_keys=['object_detected_in'],
+                            output_keys=['goal_coords_out', 'object_detected_out'] )
         
         self.detector = Detector(gpu_id=0, config_path='/opt/darknet/cfg/yolov4.cfg',
                                  weights_path='/opt/darknet/yolov4.weights',
                                  lib_darknet_path='/opt/darknet/libdarknet.so',
-                                 meta_path='/ros_ws/src/itr/cfg/coco.data')
+                                 meta_path='/home/k24052303/ros_ws/src/itr/cfg/coco.data')
 
         self.bridge = CvBridge()
         self.cam_subs = rospy.Subscriber("/usb_cam/image_raw", Image, self.img_callback)
@@ -71,11 +72,12 @@ class YOLODetectionState(smach.State):
                 detections = self.detector.perform_detect(image_path_or_buf=img_arr, show_image=True)
 
                 for detection in detections:
-                    if detection.class_name in self.target_objects:
+                    if detection.class_name in self.target_objects and detection.class_name != userdata.object_detected_in:
+                        print(f"DETECTED {detection.class_name}")
                         if detection.class_name == 'apple':
                             return 'aborted'
                         else:
-                            # userdata.detection = detection
+                            userdata.object_detected_out = detection.class_name
                             userdata.goal_coords_out = self.target_objects[detection.class_name]
                             return 'succeeded'
             else:
@@ -93,8 +95,8 @@ def child_term_cb(outcome_map):
         
     if outcome_map.get('NAVIGATE_TO_ROOM') == 'completed':
         return True
-    if outcome_map.get('NAVIGATE_TO_ROOM') == 'failed':
-        return True
+    if outcome_map.get('NAVIGATE_TO_ROOM') in ['aborted', 'preempted']:
+        return 'failed'
     return False
 
 def main():
@@ -103,33 +105,40 @@ def main():
     mb_client.wait_for_server()
 
     sm = StateMachine(outcomes=['finished'])
+    sm.userdata.sm_object_detected = '' 
+    sm.userdata.sm_goal_coords = []
+
     with sm:
 
         cc = Concurrence(outcomes = ['new_goal', 'completed', 'aborted', 'failed'],
                         default_outcome = 'completed',
+                        input_keys=['goal_coords_in', 'object_detected_in'], 
+                        output_keys=['goal_coords_out', 'object_detected_out'], 
                         child_termination_cb=child_term_cb,
                         outcome_map={
                             'new_goal': {'DETECT_OBJECTS': 'succeeded'},
                             'aborted': {'DETECT_OBJECTS': 'aborted'},
-                            'completed': {'NAVIGATE_TO_ROOM': 'completed'},
-                            'failed': {'NAVIGATE_TO_ROOM': 'failed'},
+                            'completed': {'NAVIGATE_TO_ROOM': 'succeeded'},
+                            'failed': {'NAVIGATE_TO_ROOM': 'aborted'},
                         })
             
         with cc:
             Concurrence.add('DETECT_OBJECTS', YOLODetectionState(),
-                            remapping={'goal_coords_out': 'goal_coords_out'})
+                            remapping={'goal_coords_out': 'goal_coords_out', 'object_detected_out': 'object_detected_out',
+                             'object_detected_in': 'object_detected_in'})
             Concurrence.add('NAVIGATE_TO_ROOM', 
                 SimpleActionState('move_base', MoveBaseAction, goal_cb=nav_to_room_vb, input_keys=['goal_coords_in']),
-                    transitions={'succeeded': 'completed', 'aborted':'failed', 'preempted':'failed'},
                     remapping={'goal_coords_in': 'goal_coords_in'})
 
         StateMachine.add('DETECT_OBJECTS', YOLODetectionState(),
             transitions={'succeeded': 'PARALLEL_MOVE', 'aborted': 'finished', },
-            remapping={'goal_coords_out':'sm_goal_coords'}) 
+            remapping={'goal_coords_out':'sm_goal_coords', 'object_detected_out': 'sm_object_detected',
+            'object_detected_in': 'sm_object_detected'}) 
     
         StateMachine.add('PARALLEL_MOVE', cc,
             transitions={'completed': 'DETECT_OBJECTS', 'new_goal': 'PARALLEL_MOVE', 'aborted': 'finished', 'failed': 'finished'},
-            remapping={'goal_coords_in':'sm_goal_coords', 'goal_coords_out':'sm_goal_coords'})
+            remapping={'goal_coords_in':'sm_goal_coords', 'goal_coords_out':'sm_goal_coords', 
+            'object_detected_out': 'sm_object_detected', 'object_detected_in': 'sm_object_detected'})
 
     outcome = sm.execute()
 

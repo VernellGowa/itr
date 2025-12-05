@@ -1,8 +1,8 @@
 # generated from genmsg/cmake/pkg-genmsg.cmake.em
 
-message(STATUS "itr: 14 messages, 2 services")
+message(STATUS "itr: 15 messages, 3 services")
 
-set(MSG_I_FLAGS "-Iitr:/home/k24052303/ros_ws/devel/share/itr/msg;-Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg;-Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg;-Imove_base_msgs:/opt/ros/noetic/share/move_base_msgs/cmake/../msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Iitr:/home/k24052303/ros_ws/src/itr/msg;-Iitr:/home/k24052303/ros_ws/devel/share/itr/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg;-Igeometry_msgs:/opt/ros/noetic/share/geometry_msgs/cmake/../msg;-Iactionlib_msgs:/opt/ros/noetic/share/actionlib_msgs/cmake/../msg;-Imove_base_msgs:/opt/ros/noetic/share/move_base_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -17,24 +17,29 @@ add_custom_target(itr_generate_messages ALL)
 
 
 
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg" NAME_WE)
+add_custom_target(_itr_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg" ""
+)
+
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg" NAME_WE)
 add_custom_target(_itr_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg" "itr/GoToLocationActionGoal:itr/GoToLocationResult:itr/GoToLocationFeedback:itr/GoToLocationGoal:itr/GoToLocationActionFeedback:actionlib_msgs/GoalID:std_msgs/Header:actionlib_msgs/GoalStatus:itr/GoToLocationActionResult"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg" "std_msgs/Header:itr/GoToLocationActionGoal:actionlib_msgs/GoalID:itr/GoToLocationResult:itr/GoToLocationActionResult:actionlib_msgs/GoalStatus:itr/GoToLocationFeedback:itr/GoToLocationGoal:itr/GoToLocationActionFeedback"
 )
 
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg" NAME_WE)
 add_custom_target(_itr_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg" "itr/GoToLocationGoal:actionlib_msgs/GoalID:std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg" "std_msgs/Header:actionlib_msgs/GoalID:itr/GoToLocationGoal"
 )
 
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg" NAME_WE)
 add_custom_target(_itr_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg" "itr/GoToLocationResult:actionlib_msgs/GoalStatus:actionlib_msgs/GoalID:std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg" "std_msgs/Header:actionlib_msgs/GoalID:itr/GoToLocationResult:actionlib_msgs/GoalStatus"
 )
 
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg" NAME_WE)
 add_custom_target(_itr_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg" "actionlib_msgs/GoalStatus:actionlib_msgs/GoalID:std_msgs/Header:itr/GoToLocationFeedback"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg" "std_msgs/Header:actionlib_msgs/GoalID:itr/GoToLocationFeedback:actionlib_msgs/GoalStatus"
 )
 
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg" NAME_WE)
@@ -54,22 +59,22 @@ add_custom_target(_itr_generate_messages_check_deps_${_filename}
 
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtAction.msg" NAME_WE)
 add_custom_target(_itr_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtAction.msg" "itr/LookAtActionResult:itr/LookAtFeedback:itr/LookAtActionFeedback:itr/LookAtResult:actionlib_msgs/GoalID:std_msgs/Header:actionlib_msgs/GoalStatus:itr/LookAtActionGoal:geometry_msgs/Point:itr/LookAtGoal"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtAction.msg" "geometry_msgs/Point:std_msgs/Header:itr/LookAtGoal:actionlib_msgs/GoalID:itr/LookAtResult:actionlib_msgs/GoalStatus:itr/LookAtActionResult:itr/LookAtFeedback:itr/LookAtActionGoal:itr/LookAtActionFeedback"
 )
 
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg" NAME_WE)
 add_custom_target(_itr_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg" "geometry_msgs/Point:actionlib_msgs/GoalID:std_msgs/Header:itr/LookAtGoal"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg" "geometry_msgs/Point:std_msgs/Header:itr/LookAtGoal:actionlib_msgs/GoalID"
 )
 
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg" NAME_WE)
 add_custom_target(_itr_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg" "itr/LookAtResult:actionlib_msgs/GoalStatus:actionlib_msgs/GoalID:std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg" "std_msgs/Header:itr/LookAtResult:actionlib_msgs/GoalID:actionlib_msgs/GoalStatus"
 )
 
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg" NAME_WE)
 add_custom_target(_itr_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg" "itr/LookAtFeedback:actionlib_msgs/GoalStatus:actionlib_msgs/GoalID:std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg" "std_msgs/Header:itr/LookAtFeedback:actionlib_msgs/GoalID:actionlib_msgs/GoalStatus"
 )
 
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg" NAME_WE)
@@ -97,6 +102,11 @@ add_custom_target(_itr_generate_messages_check_deps_${_filename}
   COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv" ""
 )
 
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv" NAME_WE)
+add_custom_target(_itr_generate_messages_check_deps_${_filename}
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "itr" "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv" "itr/YOLODetection"
+)
+
 #
 #  langs = gencpp;geneus;genlisp;gennodejs;genpy
 #
@@ -104,27 +114,33 @@ add_custom_target(_itr_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(itr
+  "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
+)
+_generate_msg_cpp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
 )
 _generate_msg_cpp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
 )
 _generate_msg_cpp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
 )
 _generate_msg_cpp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
 )
 _generate_msg_cpp(itr
@@ -148,25 +164,25 @@ _generate_msg_cpp(itr
 _generate_msg_cpp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtAction.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
 )
 _generate_msg_cpp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
 )
 _generate_msg_cpp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
 )
 _generate_msg_cpp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
 )
 _generate_msg_cpp(itr
@@ -199,6 +215,12 @@ _generate_srv_cpp(itr
   "/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv"
   "${MSG_I_FLAGS}"
   ""
+  ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
+)
+_generate_srv_cpp(itr
+  "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv"
+  "${MSG_I_FLAGS}"
+  "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/itr
 )
 
@@ -214,6 +236,8 @@ add_custom_target(itr_generate_messages_cpp
 add_dependencies(itr_generate_messages itr_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg" NAME_WE)
+add_dependencies(itr_generate_messages_cpp _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg" NAME_WE)
 add_dependencies(itr_generate_messages_cpp _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg" NAME_WE)
@@ -246,6 +270,8 @@ get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/GetCoordina
 add_dependencies(itr_generate_messages_cpp _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv" NAME_WE)
 add_dependencies(itr_generate_messages_cpp _itr_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv" NAME_WE)
+add_dependencies(itr_generate_messages_cpp _itr_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(itr_gencpp)
@@ -257,27 +283,33 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS itr_generate_messages_cpp)
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(itr
+  "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
+)
+_generate_msg_eus(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
 )
 _generate_msg_eus(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
 )
 _generate_msg_eus(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
 )
 _generate_msg_eus(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
 )
 _generate_msg_eus(itr
@@ -301,25 +333,25 @@ _generate_msg_eus(itr
 _generate_msg_eus(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtAction.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
 )
 _generate_msg_eus(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
 )
 _generate_msg_eus(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
 )
 _generate_msg_eus(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
 )
 _generate_msg_eus(itr
@@ -352,6 +384,12 @@ _generate_srv_eus(itr
   "/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv"
   "${MSG_I_FLAGS}"
   ""
+  ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
+)
+_generate_srv_eus(itr
+  "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv"
+  "${MSG_I_FLAGS}"
+  "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
 )
 
@@ -367,6 +405,8 @@ add_custom_target(itr_generate_messages_eus
 add_dependencies(itr_generate_messages itr_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg" NAME_WE)
+add_dependencies(itr_generate_messages_eus _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg" NAME_WE)
 add_dependencies(itr_generate_messages_eus _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg" NAME_WE)
@@ -399,6 +439,8 @@ get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/GetCoordina
 add_dependencies(itr_generate_messages_eus _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv" NAME_WE)
 add_dependencies(itr_generate_messages_eus _itr_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv" NAME_WE)
+add_dependencies(itr_generate_messages_eus _itr_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(itr_geneus)
@@ -410,27 +452,33 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS itr_generate_messages_eus)
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(itr
+  "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
+)
+_generate_msg_lisp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
 )
 _generate_msg_lisp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
 )
 _generate_msg_lisp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
 )
 _generate_msg_lisp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
 )
 _generate_msg_lisp(itr
@@ -454,25 +502,25 @@ _generate_msg_lisp(itr
 _generate_msg_lisp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtAction.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
 )
 _generate_msg_lisp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
 )
 _generate_msg_lisp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
 )
 _generate_msg_lisp(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
 )
 _generate_msg_lisp(itr
@@ -505,6 +553,12 @@ _generate_srv_lisp(itr
   "/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv"
   "${MSG_I_FLAGS}"
   ""
+  ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
+)
+_generate_srv_lisp(itr
+  "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv"
+  "${MSG_I_FLAGS}"
+  "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/itr
 )
 
@@ -520,6 +574,8 @@ add_custom_target(itr_generate_messages_lisp
 add_dependencies(itr_generate_messages itr_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg" NAME_WE)
+add_dependencies(itr_generate_messages_lisp _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg" NAME_WE)
 add_dependencies(itr_generate_messages_lisp _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg" NAME_WE)
@@ -552,6 +608,8 @@ get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/GetCoordina
 add_dependencies(itr_generate_messages_lisp _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv" NAME_WE)
 add_dependencies(itr_generate_messages_lisp _itr_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv" NAME_WE)
+add_dependencies(itr_generate_messages_lisp _itr_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(itr_genlisp)
@@ -563,27 +621,33 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS itr_generate_messages_lisp)
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(itr
+  "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
+)
+_generate_msg_nodejs(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
 )
 _generate_msg_nodejs(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
 )
 _generate_msg_nodejs(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
 )
 _generate_msg_nodejs(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
 )
 _generate_msg_nodejs(itr
@@ -607,25 +671,25 @@ _generate_msg_nodejs(itr
 _generate_msg_nodejs(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtAction.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
 )
 _generate_msg_nodejs(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
 )
 _generate_msg_nodejs(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
 )
 _generate_msg_nodejs(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
 )
 _generate_msg_nodejs(itr
@@ -658,6 +722,12 @@ _generate_srv_nodejs(itr
   "/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv"
   "${MSG_I_FLAGS}"
   ""
+  ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
+)
+_generate_srv_nodejs(itr
+  "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv"
+  "${MSG_I_FLAGS}"
+  "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
 )
 
@@ -673,6 +743,8 @@ add_custom_target(itr_generate_messages_nodejs
 add_dependencies(itr_generate_messages itr_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg" NAME_WE)
+add_dependencies(itr_generate_messages_nodejs _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg" NAME_WE)
 add_dependencies(itr_generate_messages_nodejs _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg" NAME_WE)
@@ -705,6 +777,8 @@ get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/GetCoordina
 add_dependencies(itr_generate_messages_nodejs _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv" NAME_WE)
 add_dependencies(itr_generate_messages_nodejs _itr_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv" NAME_WE)
+add_dependencies(itr_generate_messages_nodejs _itr_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
 add_custom_target(itr_gennodejs)
@@ -716,27 +790,33 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS itr_generate_messages_nodejs)
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(itr
+  "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg"
+  "${MSG_I_FLAGS}"
+  ""
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
+)
+_generate_msg_py(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
 )
 _generate_msg_py(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationGoal.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
 )
 _generate_msg_py(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionResult.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
 )
 _generate_msg_py(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionFeedback.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
 )
 _generate_msg_py(itr
@@ -760,25 +840,25 @@ _generate_msg_py(itr
 _generate_msg_py(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtAction.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
 )
 _generate_msg_py(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionGoal.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg"
+  "/opt/ros/noetic/share/geometry_msgs/cmake/../msg/Point.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtGoal.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
 )
 _generate_msg_py(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionResult.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtResult.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
 )
 _generate_msg_py(itr
   "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtActionFeedback.msg"
   "${MSG_I_FLAGS}"
-  "/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/k24052303/ros_ws/devel/share/itr/msg/LookAtFeedback.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalID.msg;/opt/ros/noetic/share/actionlib_msgs/cmake/../msg/GoalStatus.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
 )
 _generate_msg_py(itr
@@ -813,6 +893,12 @@ _generate_srv_py(itr
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
 )
+_generate_srv_py(itr
+  "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv"
+  "${MSG_I_FLAGS}"
+  "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg"
+  ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
+)
 
 ### Generating Module File
 _generate_module_py(itr
@@ -826,6 +912,8 @@ add_custom_target(itr_generate_messages_py
 add_dependencies(itr_generate_messages itr_generate_messages_py)
 
 # add dependencies to all check dependencies targets
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/msg/YOLODetection.msg" NAME_WE)
+add_dependencies(itr_generate_messages_py _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationAction.msg" NAME_WE)
 add_dependencies(itr_generate_messages_py _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/devel/share/itr/msg/GoToLocationActionGoal.msg" NAME_WE)
@@ -857,6 +945,8 @@ add_dependencies(itr_generate_messages_py _itr_generate_messages_check_deps_${_f
 get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/GetCoordinates.srv" NAME_WE)
 add_dependencies(itr_generate_messages_py _itr_generate_messages_check_deps_${_filename})
 get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/LowBattery.srv" NAME_WE)
+add_dependencies(itr_generate_messages_py _itr_generate_messages_check_deps_${_filename})
+get_filename_component(_filename "/home/k24052303/ros_ws/src/itr/srv/YOLOLastFrame.srv" NAME_WE)
 add_dependencies(itr_generate_messages_py _itr_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -875,6 +965,9 @@ if(gencpp_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/it
     DESTINATION ${gencpp_INSTALL_DIR}
   )
 endif()
+if(TARGET std_msgs_generate_messages_cpp)
+  add_dependencies(itr_generate_messages_cpp std_msgs_generate_messages_cpp)
+endif()
 if(TARGET geometry_msgs_generate_messages_cpp)
   add_dependencies(itr_generate_messages_cpp geometry_msgs_generate_messages_cpp)
 endif()
@@ -891,6 +984,9 @@ if(geneus_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/it
     DIRECTORY ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/itr
     DESTINATION ${geneus_INSTALL_DIR}
   )
+endif()
+if(TARGET std_msgs_generate_messages_eus)
+  add_dependencies(itr_generate_messages_eus std_msgs_generate_messages_eus)
 endif()
 if(TARGET geometry_msgs_generate_messages_eus)
   add_dependencies(itr_generate_messages_eus geometry_msgs_generate_messages_eus)
@@ -909,6 +1005,9 @@ if(genlisp_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/
     DESTINATION ${genlisp_INSTALL_DIR}
   )
 endif()
+if(TARGET std_msgs_generate_messages_lisp)
+  add_dependencies(itr_generate_messages_lisp std_msgs_generate_messages_lisp)
+endif()
 if(TARGET geometry_msgs_generate_messages_lisp)
   add_dependencies(itr_generate_messages_lisp geometry_msgs_generate_messages_lisp)
 endif()
@@ -925,6 +1024,9 @@ if(gennodejs_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_D
     DIRECTORY ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/itr
     DESTINATION ${gennodejs_INSTALL_DIR}
   )
+endif()
+if(TARGET std_msgs_generate_messages_nodejs)
+  add_dependencies(itr_generate_messages_nodejs std_msgs_generate_messages_nodejs)
 endif()
 if(TARGET geometry_msgs_generate_messages_nodejs)
   add_dependencies(itr_generate_messages_nodejs geometry_msgs_generate_messages_nodejs)
@@ -943,6 +1045,9 @@ if(genpy_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr)
     DIRECTORY ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/itr
     DESTINATION ${genpy_INSTALL_DIR}
   )
+endif()
+if(TARGET std_msgs_generate_messages_py)
+  add_dependencies(itr_generate_messages_py std_msgs_generate_messages_py)
 endif()
 if(TARGET geometry_msgs_generate_messages_py)
   add_dependencies(itr_generate_messages_py geometry_msgs_generate_messages_py)
