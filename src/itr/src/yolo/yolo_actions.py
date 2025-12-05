@@ -22,7 +22,7 @@ from itr.msg import YOLODetection
 import numpy as np
 from yolov4 import Detector
 
-def nav_to_room_vb(userdata, goal):
+def nav_to_room_cb(userdata, goal):
     target = MoveBaseGoal()
     target.target_pose.header.frame_id = "map"
     target.target_pose.header.stamp = rospy.Time.now()
@@ -58,7 +58,6 @@ class YOLODetectionState(smach.State):
         self.bridge = CvBridge()
         self.cam_subs = rospy.Subscriber("/usb_cam/image_raw", Image, self.img_callback)
 
-        self.pub = rospy.Publisher("/test_image", Image, queue_size=1)
         self.cv_image = None
         self.rate = rospy.Rate(10)
 
@@ -85,7 +84,16 @@ class YOLODetectionState(smach.State):
                 pass
                 
             self.rate.sleep()
-        return 'succeeded'        
+        return 'succeeded'  
+
+def charger_goal_cb(userdata, goal):
+    target = MoveBaseGoal()
+    target.target_pose.header.frame_id = "map"
+    target.target_pose.header.stamp = rospy.Time.now()
+    target.target_pose.pose.position.x = goal.x
+    target.target_pose.pose.position.y = goal.y
+    target.target_pose.pose.orientation.w = 1.0
+    return target      
     
 def child_term_cb(outcome_map): 
     if outcome_map.get('DETECT_OBJECTS') == 'succeeded':
@@ -127,7 +135,12 @@ def main():
                             remapping={'goal_coords_out': 'goal_coords_out', 'object_detected_out': 'object_detected_out',
                              'object_detected_in': 'object_detected_in'})
             Concurrence.add('NAVIGATE_TO_ROOM', 
+<<<<<<< HEAD
                 SimpleActionState('move_base', MoveBaseAction, goal_cb=nav_to_room_vb, input_keys=['goal_coords_in']),
+=======
+                SimpleActionState('move_base', MoveBaseAction, goal_cb=nav_to_room_cb, input_keys=['goal_coords_in']),
+                    transitions={'succeeded': 'completed', 'aborted':'failed', 'preempted':'failed'},
+>>>>>>> 0afbdad8dfbb3c898ca688bd6fa57932dd5291ca
                     remapping={'goal_coords_in': 'goal_coords_in'})
 
         StateMachine.add('DETECT_OBJECTS', YOLODetectionState(),

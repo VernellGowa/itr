@@ -1,0 +1,9 @@
+
+string name
+---
+
+bool searching
+
+string object_name
+---
+bool request_accepted
