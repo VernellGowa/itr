@@ -44,11 +44,12 @@ class FindObjectState(smach.State):
                 return 'preempted'
             
             detections = self.detector.get_detections()
-            for detection in detections:
-                if detection.class_name == userdata.object_name:
-                    userdata.has_found = True
+            if detections:
+                for detection in detections:
+                    if detection.class_name == userdata.object_name:
+                        userdata.has_found = True
 
-                    return 'found'
+                        return 'found'
 
             self.rate.sleep()
         userdata.room_no = (userdata.room_no+1) % 6

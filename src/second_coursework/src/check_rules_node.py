@@ -43,18 +43,19 @@ class CheckRuleState(smach.State):
                 return 'preempted'
             
             detections = self.detector.get_detections()
-            for detection in detections:
-                if userdata.room == 'kitchen':
-                    if detection.class_name == 'human':
-                        # self.rule_pub.publish(1)
-                        feedback.broken_rule = 1
-                        self.server.publish_feedback(feedback)
+            if detections:
+                for detection in detections:
+                    if userdata.room == 'kitchen':
+                        if detection.class_name == 'human':
+                            # self.rule_pub.publish(1)
+                            feedback.broken_rule = 1
+                            self.server.publish_feedback(feedback)
 
-                elif userdata.room == 'bedroom':
-                    if detection.class_name in self.food_items:
-                        # self.rule_pub.publish(2)
-                        feedback.broken_rule = 2
-                        self.server.publish_feedback(feedback)
+                    elif userdata.room == 'bedroom':
+                        if detection.class_name in self.food_items:
+                            # self.rule_pub.publish(2)
+                            feedback.broken_rule = 2
+                            self.server.publish_feedback(feedback)
             self.rate.sleep()
 
         return 'finished'
