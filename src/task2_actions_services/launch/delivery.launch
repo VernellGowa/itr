@@ -1,0 +1,16 @@
+<launch>
+    <node pkg="task2_actions_services" 
+          type="delivery_actions.py" 
+          name="delivery_action_server" 
+          output="screen"/>
+
+    <node pkg="task2_actions_services" 
+          type="getCoordinates.py" 
+          name="get_coordinates" 
+          output="screen"/>
+
+      <node pkg="task2_actions_services" 
+            type="delivery.py" 
+            name="delivery_client" 
+            output="screen"/>
+    </launch>

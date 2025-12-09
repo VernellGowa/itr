@@ -9,17 +9,17 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 from actionlib_msgs.msg import GoalStatus
 import actionlib
 from detector import DetectorSingleton
-
+from std_msgs.msg import String
 from second_coursework.srv import FindObject, FindObjectResponse, FindObjectRequest
 from second_coursework.msg import FindObjectAction, FindObjectFeedback
 
 ROOMS = {
-    'A': (4,8),
-    'B': (8,8),
-    'C': (2,2),
-    'D': (2,8),
-    'E': (4,2),
-    'F': (8,2),
+    'A': (2,8),
+    'B': (6,8),
+    'C': (11,8),
+    'D': (2,2),
+    'E': (6,2),
+    'F': (11,2),
 }
 
 class FindObjectState(smach.State):
@@ -27,16 +27,18 @@ class FindObjectState(smach.State):
     
     def __init__(self, find_object_serv):
         smach.State.__init__(self, 
-                            outcomes=['found', 'not_found'],
-                            output_keys=['found', 'room_no'] )
+                            outcomes=['found', 'not_found', 'preempted'],
+                            output_keys=['has_found', 'room_no'],
+                            input_keys=['object_name', 'room_no'],  )
         
         self.detector = DetectorSingleton()
         self.rate = rospy.Rate(10)
         self.server = find_object_serv
         
     def execute(self, userdata):
-        timeout_duration = rospy.Duration(5.0)
+        timeout_duration = rospy.Duration(12.0)
         start_time = rospy.Time.now()
+        rospy.loginfo(f"Looking for a {userdata.object_name}")
 
         while (rospy.Time.now() - start_time) < timeout_duration and not rospy.is_shutdown():
             if self.server.is_preempt_requested():
@@ -44,8 +46,11 @@ class FindObjectState(smach.State):
                 return 'preempted'
             
             detections = self.detector.get_detections()
+            # rospy.loginfo(f"Found {len(detections)} detections")
+
             if detections:
                 for detection in detections:
+                    rospy.loginfo(f"Found a {detection.class_name}")
                     if detection.class_name == userdata.object_name:
                         userdata.has_found = True
 
@@ -58,12 +63,18 @@ class FindObjectState(smach.State):
 
 
 class ReportState(smach.State):
-    def __init__(self):
+    def __init__(self, tts_pub):
         smach.State.__init__(self, 
-                            outcomes=['finished',], )
+                            outcomes=['finished',],
+                            input_keys=['object_name', 'room_no'],)
         
+        self.tts_pub = tts_pub
+  
     def execute(self, userdata):
-        txt = f"Found the object, {userdata.object_name} in room {chr(65+userdata.room_no)}"
+        txt = f"Found the object, {userdata.object_name} in room {chr(65+userdata.room_no)}. Well done!"
+        rospy.loginfo(txt)
+
+        self.tts_pub.publish(txt)
 
         return 'finished' 
 
@@ -71,6 +82,8 @@ class FindObjectActionServer():
     def __init__(self):
         self.find_object_serv = actionlib.SimpleActionServer('find_object_action', FindObjectAction,
             execute_cb=self.find_object_execute_cb, auto_start=False)
+
+        self.tts_pub = rospy.Publisher('/tts/phrase', String, queue_size=5000)
 
         self.mb_client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
         self.mb_client.wait_for_server()
@@ -97,22 +110,23 @@ class FindObjectActionServer():
         return 'aborted'
 
     def find_object_execute_cb(self, goal):
-        sm = StateMachine(outcomes=['finished'])
+        sm = StateMachine(outcomes=['finished', 'failed'])
         sm.userdata.room_no = 0
         sm.userdata.has_found = False
         sm.userdata.object_name = goal.name
 
         with sm:
             StateMachine.add('NAVIGATE_TO_ROOM', 
-                SimpleActionState('move_base', MoveBaseAction, goal_cb=self.nav_to_room_cb, result_cb=self.nav_result_cb),
-                transitions={'succeeded': 'find_object', 'aborted':'failed', 'found':'report'},
+                SimpleActionState('move_base', MoveBaseAction, goal_cb=self.nav_to_room_cb, result_cb=self.nav_result_cb,
+                                  outcomes=['succeeded', 'aborted', 'preempted', 'found'], input_keys=['room_no', 'has_found']),
+                transitions={'succeeded': 'FIND_OBJECT', 'aborted':'failed', 'preempted': 'failed', 'found':'REPORT'},
                 remapping={'room_no': 'room_no', 'has_found': 'has_found'})
         
-            StateMachine.add('find_object', FindObjectState(self.find_object_serv),
+            StateMachine.add('FIND_OBJECT', FindObjectState(self.find_object_serv),
                 transitions={'found': 'NAVIGATE_TO_ROOM', 'not_found': 'NAVIGATE_TO_ROOM', 'preempted': 'finished'},
                 remapping={'object_name': 'object_name', 'room_no':'room_no', 'has_found': 'has_found'}) 
             
-            StateMachine.add('report', ReportState(),
+            StateMachine.add('REPORT', ReportState(self.tts_pub),
                 transitions={'finished': 'finished',},
                 remapping={'room_no': 'room_no', 'object_name': 'object_name'}) 
         

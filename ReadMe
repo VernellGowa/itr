@@ -16,5 +16,19 @@ rosrun rqt_image_view rqt_image_view
 catkin_make -DRT_LIBRARY=~/my_system_libs/librt.so
 
 roslaunch second_coursework student_nodes.launch
+roslaunch second_coursework itr_CS_cw2526.launch video_folder:=/home/k24052303/ros_ws/src/second_coursework/cs_cw_2526_videos
+
+rosservice call /find_object "object_name: 'diningtable'"
+
+roslaunch ros_vosk ros_vosk.launch
+rostopic pub /tts/phrase std_msgs/String "data: 'This is a test'"
 
 chmod +x *.py
+
+rosrun turtlesim turtlesim_node
+rosrun task1_motion_control rectangle.py
+
+chmod +x src/task2_actions_services/src/*.py
+
+roslaunch task2_actions_services delivery.launch
+rosrun task2_actions_services delivery.py

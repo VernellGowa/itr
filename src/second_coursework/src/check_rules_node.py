@@ -10,17 +10,18 @@ from second_coursework.msg import CheckRulesAction, CheckRulesFeedback
 from detector import DetectorSingleton
 
 ROOMS = {
-    'kitchen': (4,8),
-    'bedroom': (8,8)
+    'kitchen': (11,2),
+    'bedroom': (11,8)
 }
 
 class CheckRuleState(smach.State):
-    food_items = ['pizza', 'sandwich', 'banana', 'broccol']
+    food_items = ['pizza', 'sandwich', 'banana', 'broccoli']
     
     def __init__(self, check_rules_serv):
         smach.State.__init__(self, 
                             outcomes=['finished', 'preempted'],
-                             output_keys=['room_out'] )
+                            output_keys=['room_out'],
+                            input_keys=['room',], )
         
         self.detector = DetectorSingleton()
         self.rate = rospy.Rate(10)
@@ -32,7 +33,7 @@ class CheckRuleState(smach.State):
             return 'preempted'
 
         feedback = CheckRulesFeedback()
-        timeout_duration = rospy.Duration(5.0)
+        timeout_duration = rospy.Duration(8.0)
     
         start_time = rospy.Time.now()
         userdata.room_out = 'kitchen' if userdata.room == 'bedroom' else 'bedroom'
@@ -45,15 +46,16 @@ class CheckRuleState(smach.State):
             detections = self.detector.get_detections()
             if detections:
                 for detection in detections:
+                    rospy.loginfo(f"Found a {detection.class_name} in {userdata.room}")
                     if userdata.room == 'kitchen':
-                        if detection.class_name == 'human':
-                            # self.rule_pub.publish(1)
+                        if detection.class_name == 'person':
+                            rospy.loginfo("Found a human")
                             feedback.broken_rule = 1
                             self.server.publish_feedback(feedback)
 
                     elif userdata.room == 'bedroom':
                         if detection.class_name in self.food_items:
-                            # self.rule_pub.publish(2)
+                            rospy.loginfo("Found food")
                             feedback.broken_rule = 2
                             self.server.publish_feedback(feedback)
             self.rate.sleep()
@@ -81,13 +83,13 @@ class CheckRulesActionServer():
         return target
 
     def check_rules_execute_cb(self, goal):
-        sm = StateMachine(outcomes=['finished'])
+        sm = StateMachine(outcomes=['finished', 'failed', 'preempted'])
         sm.userdata.room = 'kitchen'
 
         with sm:
             StateMachine.add('NAVIGATE_TO_ROOM', 
-                SimpleActionState('move_base', MoveBaseAction, goal_cb=self.nav_to_room_cb),
-                transitions={'succeeded': 'CHECK_RULES', 'aborted':'failed', 'preempted':'failed'},
+                SimpleActionState('move_base', MoveBaseAction, goal_cb=self.nav_to_room_cb, input_keys=['room']),
+                transitions={'succeeded': 'CHECK_RULES', 'aborted':'failed', 'preempted':'preempted'},
                 remapping={'room': 'room'})
         
             StateMachine.add('CHECK_RULES', CheckRuleState(self.check_rules_serv),

@@ -30,6 +30,8 @@ class DetectorSingleton:
             cls._instance.bridge = CvBridge()
             cls._instance.cv_image = None
             rospy.Subscriber("/usb_cam/image_raw", Image, cls._instance.img_callback) 
+            rospy.Subscriber("/camera/image", Image, cls._instance.img_callback) 
+
         return cls._instance
     
     def img_callback(self, msg):

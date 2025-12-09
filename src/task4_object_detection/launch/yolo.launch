@@ -1,0 +1,15 @@
+<launch>
+    <include file="$(find rosplan_stage_demo)/launch/empty_stage_single_robot.launch"/>
+
+    <node pkg="rviz" type="rviz" name="rviz" 
+          args="-d $(find rosplan_stage_demo)/config/rosplan_stage_demo.rviz"/>
+
+    <include file="$(find video_stream_opencv)/launch/camera.launch">
+        <arg name="camera_name" value="usb_cam" />
+        <arg name="loop_videofile" value="true" />
+        <arg name="video_stream_provider" value="/home/k24052303/ros_ws/objects2.mov" />
+    </include>
+
+    <node pkg="itr" type="yolo_actions.py" name="yolo_actions" output="screen"/>
+
+</launch>

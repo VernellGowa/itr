@@ -1,2 +1,2 @@
-itr:second_coursework
+itr:second_coursework:task1_motion_control:task2_actions_services:task3_state_machine:task4_object_detection
 -DCATKIN_DEVEL_PREFIX=/home/k24052303/ros_ws/devel -DCMAKE_INSTALL_PREFIX=/home/k24052303/ros_ws/install -G Unix Makefiles

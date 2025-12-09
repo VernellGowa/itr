@@ -1,0 +1,10 @@
+# Request
+string name
+
+---
+# Result
+bool result
+
+---
+# Feedback
+float64 distance
