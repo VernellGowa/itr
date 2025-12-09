@@ -4,8 +4,8 @@ import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
-from itr.srv import YOLOLastFrame, YOLOLastFrameResponse
-from itr.msg import YOLODetection
+from task4_object_detection.srv import YOLOLastFrame, YOLOLastFrameResponse
+from task4_object_detection.msg import YOLODetection
 import numpy as np
 from yolov4 import Detector
 import random
@@ -16,7 +16,7 @@ class YOLOService:
         self.detector = Detector(gpu_id=0, config_path='/opt/darknet/cfg/yolov4.cfg',
                                  weights_path='/opt/darknet/yolov4.weights',
                                  lib_darknet_path='/opt/darknet/libdarknet.so',
-                                 meta_path='/ros_ws/src/itr/cfg/coco.data')
+                                 meta_path='/ros_ws/src/task4_object_detection/cfg/coco.data')
 
         self.bridge = CvBridge()
         self.cam_subs = rospy.Subscriber("/usb_cam/image_raw", Image, self.img_callback)
@@ -25,7 +25,7 @@ class YOLOService:
         self.cv_image = None
 
         rospy.init_node('yolo_ros')
-        s = rospy.Service('get_detections', YOLOLastFrame, yolo_service)
+        s = rospy.Service('get_detections', YOLOLastFrame, self.yolo_service)
         rospy.spin()
 
     def img_callback(self, msg):

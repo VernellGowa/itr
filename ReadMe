@@ -32,3 +32,9 @@ chmod +x src/task2_actions_services/src/*.py
 
 roslaunch task2_actions_services delivery.launch
 rosrun task2_actions_services delivery.py
+
+rosrun task3_state_machine cleaner.py
+rosservice call /low_battery
+rostopic pub /dirt_detected std_msgs/Bool "data: true" -1
+
+roslaunch task4_object_detection yolo.launch
